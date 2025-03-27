@@ -1,11 +1,21 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulate login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   const handleDashboardClick = () => {
     if (isLoggedIn) {
@@ -29,52 +39,53 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <ul className="hidden md:flex space-x-8 font-medium text-gray-700 text-lg">
           <li>
-            <Link
-              to="/"
-              className="relative group hover:text-green-600 transition"
-            >
+            <Link to="/" className="hover:text-green-600 transition">
               Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all group-hover:w-full"></span>
             </Link>
           </li>
           <li>
             <button
               onClick={handleDashboardClick}
-              className="relative group hover:text-green-600 transition"
+              className="hover:text-green-600 transition"
             >
               Dashboard
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all group-hover:w-full"></span>
             </button>
           </li>
           <li>
-            <Link
-              to="/about"
-              className="relative group hover:text-green-600 transition"
-            >
+            <Link to="/about" className="hover:text-green-600 transition">
               About Us
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all group-hover:w-full"></span>
             </Link>
           </li>
         </ul>
 
-        <div className="hidden md:flex space-x-4 items-center">
-          {/* Log In Button */}
-          <Link
-            to="/login"
-            className="relative group px-4 py-2 text-green-700 border border-green-600 rounded-lg font-medium transition-transform duration-300 hover:scale-105 hover:bg-green-50 hover:shadow-md"
-          >
-            Log In
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-600 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-
-          {/* Sign Up Button */}
-          <Link
-            to="/signup"
-            className="relative px-4 py-2 bg-green-600 text-white rounded-lg font-semibold transition-all duration-300 shadow hover:bg-green-700 hover:scale-105 hover:shadow-xl"
-          >
-            <span className="relative z-10">Sign Up</span>
-            <div className="absolute inset-0 rounded-lg bg-green-800 opacity-0 group-hover:opacity-10 transition-all duration-300" />
-          </Link>
+        {/* Auth or Profile */}
+        <div className="hidden md:flex items-center space-x-4">
+          {isLoggedIn ? (
+            <>
+              <span className="text-green-700 font-semibold">👤 User</span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="text-green-700 font-medium hover:underline"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -86,7 +97,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Nav */}
       {mobileOpen && (
         <div className="md:hidden px-6 py-4 bg-white shadow-inner space-y-4">
           <Link
@@ -108,15 +119,29 @@ export default function Navbar() {
             About Us
           </Link>
           <hr />
-          <Link to="/login" className="block text-green-700">
-            Log In
-          </Link>
-          <Link
-            to="/signup"
-            className="block bg-green-600 text-white text-center py-2 rounded"
-          >
-            Sign Up
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <span className="block text-green-700">👤 User</span>
+              <button
+                onClick={handleLogout}
+                className="block w-full bg-red-500 text-white text-center py-2 rounded"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="block text-green-700">
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="block bg-green-600 text-white text-center py-2 rounded"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>

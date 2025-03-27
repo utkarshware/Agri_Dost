@@ -46,6 +46,15 @@ export default function Login() {
             Log In
           </button>
         </form>
+        <p className="text-sm text-center mt-4 text-gray-700">
+          Don’t have an account?{" "}
+          <a
+            href="/signup"
+            className="text-green-700 font-semibold hover:underline"
+          >
+            Create one
+          </a>
+        </p>
       </div>
     </section>
   );
