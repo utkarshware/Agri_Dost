@@ -21,7 +21,7 @@ export default function Login({ onLogin }) {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("isLoggedIn", "true");
       if (onLogin) onLogin(user);
-      navigate("/profile");
+      navigate("/userinfo");
     } else {
       setError("Invalid email or password.");
     }
