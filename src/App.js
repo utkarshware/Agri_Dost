@@ -1,9 +1,10 @@
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, // ✅ this line defines <Router>
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Chatbot from "./components/Chatbot";
@@ -13,7 +14,8 @@ import Dashboard from "./pages/Dashboard";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Profile from "./pages/Profile"; // 👈 Add this if you made it
+import Profile from "./pages/Profile";
+import UserInfo from "./pages/UserInfo";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,8 +40,9 @@ function App() {
 
   return (
     <Router>
+      {" "}
+      {/* ✅ This wraps everything */}
       <Navbar user={user} onLogout={handleLogout} />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -63,8 +66,11 @@ function App() {
             )
           }
         />
+        <Route
+          path="/userinfo"
+          element={user ? <UserInfo /> : <Navigate to="/login" />}
+        />
       </Routes>
-
       <Chatbot />
     </Router>
   );
