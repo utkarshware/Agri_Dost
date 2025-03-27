@@ -6,8 +6,8 @@ export default function Dashboard() {
           📊 Welcome to Your Dashboard
         </h1>
         <p className="text-lg text-gray-800 mb-10">
-          View your crop predictions, market insights, and agri-advice in
-          real-time.
+          View your crop predictions, market insights, and AI powered Chatbot
+          assistance.
         </p>
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow hover:shadow-xl transition">
