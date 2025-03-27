@@ -102,7 +102,7 @@ export default function Home() {
               <p className="mb-4">{service.description}</p>
               <button
                 onClick={service.action}
-                className="mt-auto bg-gradient-to-r from-green-300 to-green-600 text-green-900 font-semibold px-5 py-2 rounded-full hover:from-green-400 hover:to-green-700 hover:scale-105 transition-all duration-300"
+                className="mt-auto bg-white text-green-900 font-semibold px-5 py-2 rounded-full hover:from-green-400 hover:to-green-700 hover:scale-105 transition-all duration-300"
               >
                 {service.buttonLabel}
               </button>
