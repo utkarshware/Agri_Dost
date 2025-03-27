@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
+export default function Login({ onLogin }) {
+  const [email, setEmail] = useState(
+    localStorage.getItem("rememberedEmail") || ""
+  );
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
 
-    // Simulate login ✅
-    if (email && password) {
+    if (user) {
+      localStorage.setItem("rememberedEmail", email);
+      localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/dashboard");
+      if (onLogin) onLogin(user);
+      navigate("/profile");
     } else {
-      alert("Please enter your email and password.");
+      setError("Invalid email or password.");
     }
   };
 
@@ -24,6 +33,13 @@ export default function Login() {
         <h2 className="text-2xl font-bold text-green-700 mb-6 text-center">
           Log In to Agri Dost
         </h2>
+
+        {error && (
+          <p className="text-sm text-center text-red-600 font-semibold mb-4">
+            {error}
+          </p>
+        )}
+
         <form className="space-y-4" onSubmit={handleLogin}>
           <input
             type="email"
@@ -31,6 +47,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
           />
           <input
             type="password"
@@ -38,6 +55,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
           />
           <button
             type="submit"
@@ -46,6 +64,7 @@ export default function Login() {
             Log In
           </button>
         </form>
+
         <p className="text-sm text-center mt-4 text-gray-700">
           Don’t have an account?{" "}
           <a
