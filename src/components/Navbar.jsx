@@ -6,10 +6,21 @@ export default function Navbar({ user, onLogout }) {
 
   return (
     <nav className="bg-white shadow-md px-6 py-4 flex items-center justify-between">
-      <Link to="/" className="text-2xl font-bold text-green-700">
-        Agri-Dost
+      {/* Logo + Tagline */}
+      <Link to="/" className="relative block leading-tight">
+        <h1 className="text-4xl font-extrabold text-green-900 tracking-tight">
+          Agri<span className="mx-1">-</span>
+          <span className="text-green-900">Dost</span>
+        </h1>
+        <span
+          className="absolute left-[3.0rem] top-[2.2rem] text-sm font-semibold text-gray-700"
+          style={{ whiteSpace: "nowrap" }}
+        >
+          Smart Krishi ka Smart Saathi!
+        </span>
       </Link>
 
+      {/* Navigation links */}
       <div className="flex items-center gap-6">
         <Link
           to="/"
@@ -23,7 +34,6 @@ export default function Navbar({ user, onLogout }) {
         >
           About
         </Link>
-
         <Link
           to="/dashboard"
           className="text-green-700 hover:text-green-900 font-medium transition"
