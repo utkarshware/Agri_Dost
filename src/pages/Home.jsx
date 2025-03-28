@@ -16,7 +16,14 @@ export default function Home() {
         <h1 className="text-5xl md:text-6xl font-bold text-green-900">
           Welcome to Agri Dost
         </h1>
-        <p className="text-xl text-gray-800">Smart Krishi ka Smart Saathi!</p>
+        <p className="text-xl text-gray-800">
+          Agri Dost is your trusted companion in modern farming, bridging the
+          gap between tradition and technology. With smart solutions and
+          data-driven insights, we empower farmers to make informed decisions
+          for a sustainable and profitable future. Agriculture is evolving, and
+          with Agri Dost, you stay ahead—efficient, innovative, and ready for
+          tomorrow. Together, let’s cultivate success, one harvest at a time.
+        </p>
 
         <div className="flex justify-center gap-4">
           <a

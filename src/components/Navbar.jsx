@@ -32,7 +32,7 @@ export default function Navbar({ user, onLogout }) {
           to="/about"
           className="text-green-700 hover:text-green-900 font-medium transition"
         >
-          About
+          About Us
         </Link>
         <Link
           to="/dashboard"
