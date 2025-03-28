@@ -185,10 +185,10 @@ export default function Home() {
           <div>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#">Privacy Policy</a>
+                <a href="/privacy">Privacy Policy</a>
               </li>
               <li>
-                <a href="#">Terms of Service</a>
+                <a href="/tos">Terms of Service</a>
               </li>
             </ul>
           </div>

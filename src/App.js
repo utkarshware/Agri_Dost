@@ -1,10 +1,9 @@
 import {
-  BrowserRouter as Router, // ✅ this line defines <Router>
+  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Chatbot from "./components/Chatbot";
@@ -16,6 +15,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import UserInfo from "./pages/UserInfo";
+import PrivacyPolicy from "./pages/PrivacyPolicy"; // Add this import
+import TermsOfService from "./pages/TermsOfService"; // Add this import
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,8 +41,6 @@ function App() {
 
   return (
     <Router>
-      {" "}
-      {/* ✅ This wraps everything */}
       <Navbar user={user} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -70,6 +69,8 @@ function App() {
           path="/userinfo"
           element={user ? <UserInfo /> : <Navigate to="/login" />}
         />
+        <Route path="/privacy" element={<PrivacyPolicy />} /> {/* Add this */}
+        <Route path="/tos" element={<TermsOfService />} /> {/* Add this */}
       </Routes>
       <Chatbot />
     </Router>
