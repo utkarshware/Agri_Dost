@@ -20,7 +20,7 @@ except FileNotFoundError:
 
 # Load the combined dataset to get historical and recent prices
 try:
-	combined_df = pd.read_excel(r'C:\Users\51ngh\nagin-tech\PredictiveModel\combined_crop_data_citywise.xlsx')
+	combined_df = pd.read_excel('combined_crop_data_citywise.xlsx')
 	combined_df['Date'] = pd.to_datetime(combined_df['Date'])
 except FileNotFoundError:
 	print("Error: Dataset file 'combined_crop_data_citywise.xlsx' not found.")

@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Chatbot from "./components/Chatbot";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -15,8 +15,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import UserInfo from "./pages/UserInfo";
-import PrivacyPolicy from "./pages/PrivacyPolicy"; // Add this import
-import TermsOfService from "./pages/TermsOfService"; // Add this import
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import LearnMore from "./pages/LearnMore";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,20 +29,9 @@ function App() {
     }
   }, []);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLoggedIn");
-  };
-
   return (
     <Router>
-      <Navbar user={user} onLogout={handleLogout} />
+      <Navbar user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -53,24 +43,19 @@ function App() {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/profile"
-          element={
-            user ? (
-              <Profile user={user} onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={user ? <Profile user={user} /> : <Navigate to="/login" />}
         />
         <Route
           path="/userinfo"
           element={user ? <UserInfo /> : <Navigate to="/login" />}
         />
-        <Route path="/privacy" element={<PrivacyPolicy />} /> {/* Add this */}
-        <Route path="/tos" element={<TermsOfService />} /> {/* Add this */}
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/tos" element={<TermsOfService />} />
+        <Route path="/learn-more" element={<LearnMore />} />
       </Routes>
       <Chatbot />
     </Router>
