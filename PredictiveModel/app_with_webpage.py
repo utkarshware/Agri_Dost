@@ -120,8 +120,6 @@ crop_weather_sensitivity = {
 		'summer_advice': "Ensure proper irrigation to support Maize growth in hot weather."
 	}
 }
-
-
 # Function to predict weather and provide advice
 def predict_weather_and_advice(crop_name, planting_date):
 	month = planting_date.month
@@ -321,8 +319,7 @@ HTML_TEMPLATE = """
                 {% endif %}
             {% endif %}
         </div>
-
-        <div id="weather">
+		 <div id="weather">
             {% if weather_condition %}
                 <h3>Weather Prediction for Planting</h3>
                 <p><strong>Condition:</strong> <span class="weather-{{ weather_condition }}">{{ weather_condition|capitalize }}</span></p>
@@ -528,3 +525,5 @@ def index():
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
+

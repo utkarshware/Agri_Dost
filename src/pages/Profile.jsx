@@ -1,30 +1,31 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom"; // Import Navigate
+import useAuth from "../hooks/useAuth";
 
-export default function Profile({ user, onLogout }) {
+export default function Profile() {
   const navigate = useNavigate();
-  const storedUser = user || JSON.parse(localStorage.getItem("user"));
+  const { isLoggedIn } = useAuth(); // Get authentication status
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
-    if (onLogout) onLogout();
     navigate("/login");
   };
 
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />; // Redirect if not logged in
+  }
+
   return (
-    <section className="min-h-screen bg-green-50 flex items-center justify-center px-6 py-12">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-lg">
-        <h2 className="text-2xl font-bold text-green-800 mb-4 text-center">
-          👤 Welcome, {storedUser?.fullName || "User"}!
-        </h2>
-        <p className="text-center text-gray-600 mb-6">
-          Email: <strong>{storedUser?.email}</strong>
-        </p>
+    <section className="min-h-screen flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold">Welcome, {storedUser?.fullName}!</h2>
+        <p>Email: {storedUser?.email}</p>
 
         <button
           onClick={handleLogout}
-          className="w-full bg-red-500 text-white py-3 rounded hover:bg-red-600 transition"
+          className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
         >
           Sign Out
         </button>

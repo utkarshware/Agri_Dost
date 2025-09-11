@@ -45,22 +45,26 @@ export default function Chatbot() {
 
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error?.message || "Failed to fetch response from Gemini API");
+        throw new Error(
+          data.error?.message || "Failed to fetch response from Gemini API"
+        );
       }
 
       // Extract the generated response from the Gemini API
-      const botResponse = data.candidates[0]?.content?.parts[0]?.text || "Sorry, I couldn't generate a response.";
+      const botResponse =
+        data.candidates[0]?.content?.parts[0]?.text ||
+        "Sorry, I couldn't generate a response.";
 
       // Add the bot's response to the chat
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: botResponse },
-      ]);
+      setMessages((prev) => [...prev, { sender: "bot", text: botResponse }]);
     } catch (error) {
       console.error("Error calling Gemini API:", error);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "Sorry, I encountered an error. Please try again!" },
+        {
+          sender: "bot",
+          text: "Sorry, I encountered an error. Please try again!",
+        },
       ]);
     }
   };

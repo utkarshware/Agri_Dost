@@ -86,10 +86,9 @@ export default function AboutUs() {
           for price prediction, alternative crop suggestions, and real-time
           chatbot support — empowering farmers with knowledge and confidence.
         </p>
-
         <img
           src={coderBabassOG}
-          alt="Team Coder Babass"
+          alt="Team Coder Babass - Group photo"
           className="w-full object-cover rounded-xl shadow-lg max-h-[500px]"
         />
       </div>
@@ -103,7 +102,7 @@ export default function AboutUs() {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center"
+              className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center hover:scale-105"
             >
               <img
                 src={member.image}
@@ -119,10 +118,19 @@ export default function AboutUs() {
                   href={member.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-green-600 transition"
+                  className="text-gray-600 hover:text-green-600 transition duration-300"
                 >
                   <FiGithub size={22} />
                 </a>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-green-600 transition duration-300"
+                >
+                  <FiLinkedin size={22} />
+                </a>
+
                 <a
                   href={member.linkedin}
                   target="_blank"
