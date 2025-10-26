@@ -2,10 +2,10 @@ import pandas as pd
 import os
 
 # Define the base directory where the city folders are located
-base_dir = 'dataset'  # Update this to the path where your city folders are stored
+base_dir = 'dataset'  # U`pdate this to the path where your city folders are stored
 
 # List of cities (based on folder names)
-cities = ['Thane', 'Mumbai', 'Nagpur', 'Nashik', 'Pune', 'Raigad']
+cities = ['`Thane', 'Mumbai', 'Nagpur', 'Nashik', 'Pune', 'Raigad']
 
 # Dictionary to map filenames to crop names (adjust if filenames differ)
 crop_mapping = {
